@@ -1,0 +1,19 @@
+<div class="row">
+    <div ng-init="userController.getUser()">
+        <!--<p>Your fucking name is: {{ controller.user.name.first }}</p>-->
+        <!--<p>Aaaaaand your fucking last name iiiiissss: {{controller.user.name.last}}</p>-->
+        <!--<img ng-src="{{controller.user.picture}}">-->
+
+        <ul ng-repeat="user in userController.users">
+            <li>
+                <div class="row" style="border:1px solid black;">
+                    <p>{{user.name.first}}</p>
+                    <p>{{user.name.last}}</p>
+                    <img ng-src="{{user.picture.medium}}">
+
+                    <button type="submit" ng-click="userController.goToUserPage(user)">do it</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

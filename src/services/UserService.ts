@@ -1,8 +1,5 @@
 import {IUserService} from "./IUserService";
-import {User} from "../models/User";
-import IHttpService = angular.IHttpService;
-import IHttpPromiseCallbackArg = angular.IHttpPromiseCallbackArg;
-
+import {User} from "../../models/User";
 
 export class UserService implements IUserService{
 

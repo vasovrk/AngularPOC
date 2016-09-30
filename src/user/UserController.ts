@@ -1,8 +1,6 @@
-
-
-import {User} from "./models/User";
-import {IUserService} from "./services/IUserService";
 import * as _ from "lodash";
+import {User} from "../models/User";
+import {IUserService} from "../services/IUserService";
 
 export class UserController{
 
@@ -14,8 +12,8 @@ export class UserController{
     constructor(private $scope:any,
                 private $q:ng.IQService,
                 private $http:ng.IHttpService,
-                private _userService:IUserService
-               ){
+                private $state:ng.ui.IStateService,
+                private _userService:IUserService){
 
     }
 
@@ -35,5 +33,9 @@ export class UserController{
 
         _.pull(this.users, user);
 
+    }
+
+    public goToUserPage(user:User) {
+        this.$state.go("details",{"username":user.name.first});
     }
 }
