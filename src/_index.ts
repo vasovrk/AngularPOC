@@ -2,7 +2,7 @@ import {UserController} from "./user/UserController";
 import {DetailsController} from "./details/DetailsController";
 import {UserService} from "./services/UserService";
 
-angular.module('myModule',['ui.router'])
+angular.module('myModule',['ui.router', 'ui.bootstrap'])
     .service('_userService', UserService)
     .controller('UserController', UserController)
     .controller('DetailsController', DetailsController)

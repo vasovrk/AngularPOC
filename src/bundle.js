@@ -55,7 +55,7 @@
 	var UserController_1 = __webpack_require__(2);
 	var DetailsController_1 = __webpack_require__(5);
 	var UserService_1 = __webpack_require__(6);
-	angular.module('myModule', ['ui.router'])
+	angular.module('myModule', ['ui.router', 'ui.bootstrap'])
 	    .service('_userService', UserService_1.UserService)
 	    .controller('UserController', UserController_1.UserController)
 	    .controller('DetailsController', DetailsController_1.DetailsController)
@@ -119,7 +119,7 @@
 	        _.pull(this.users, user);
 	    };
 	    UserController.prototype.goToUserPage = function (user) {
-	        this.$state.go("details", { "username": user.name.first });
+	        this.$state.go("details", { "username": user.id });
 	    };
 	    return UserController;
 	}());
@@ -14886,9 +14886,15 @@
 
 	"use strict";
 	var DetailsController = (function () {
-	    function DetailsController(requestedUserId) {
+	    function DetailsController(_userService, requestedUserId) {
+	        var _this = this;
+	        this._userService = _userService;
+	        this.requestedUserId = requestedUserId;
 	        this.name = "vaso";
 	        console.log("lalakosssss" + requestedUserId);
+	        this._userService.getUserDetails(requestedUserId).then(function (user) {
+	            _this.user = user;
+	        });
 	    }
 	    return DetailsController;
 	}());
@@ -14907,9 +14913,16 @@
 	    }
 	    UserService.prototype.getUser = function () {
 	        var defer = this.$q.defer();
-	        this.$http.get("https://randomuser.me/api/?results=10")
+	        this.$http.get("http://localhost:3000/persons?results=10")
 	            .then(function (result) {
-	            defer.resolve(result.data.results);
+	            defer.resolve(result.data);
+	        });
+	        return defer.promise;
+	    };
+	    UserService.prototype.getUserDetails = function (userId) {
+	        var defer = this.$q.defer();
+	        this.$http.get("http://localhost:3000/persons/" + userId).then(function (result) {
+	            defer.resolve(result.data);
 	        });
 	        return defer.promise;
 	    };

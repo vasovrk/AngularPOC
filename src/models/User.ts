@@ -6,4 +6,5 @@ export class User{
     email:string;
     phone:string;
     nat:string;
+    id:string;
 }

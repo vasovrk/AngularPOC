@@ -37,6 +37,6 @@ export class UserController{
     }
 
     public goToUserPage(user:User) {
-        this.$state.go("details",{"username":user.name.first});
+        this.$state.go("details",{"username":user.id});
     }
 }

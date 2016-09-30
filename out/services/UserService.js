@@ -6,9 +6,16 @@ var UserService = (function () {
     }
     UserService.prototype.getUser = function () {
         var defer = this.$q.defer();
-        this.$http.get("https://randomuser.me/api/?results=10")
+        this.$http.get("http://localhost:3000/persons?results=10")
             .then(function (result) {
-            defer.resolve(result.data.results);
+            defer.resolve(result.data);
+        });
+        return defer.promise;
+    };
+    UserService.prototype.getUserDetails = function (userId) {
+        var defer = this.$q.defer();
+        this.$http.get("http://localhost:3000/persons/" + userId).then(function (result) {
+            defer.resolve(result.data);
         });
         return defer.promise;
     };
