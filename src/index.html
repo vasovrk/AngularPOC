@@ -21,28 +21,29 @@
 </head>
 <!-- 3. Display the application -->
 <body ng-app="myModule">
-<div class="row">
-<div ng-controller="UserController as controller" ng-init="controller.getUser()">
-    <!--<p>Your fucking name is: {{ controller.user.name.first }}</p>-->
-    <!--<p>Aaaaaand your fucking last name iiiiissss: {{controller.user.name.last}}</p>-->
-    <!--<img ng-src="{{controller.user.picture}}">-->
 
-    <ul ng-repeat="user in controller.users">
-        <li>
-            <div class="row" style="border:1px solid black;">
-            <p>{{user.name.first}}</p>
-            <p>{{user.name.last}}</p>
-            <img ng-src="{{user.picture.medium}}">
+<!--<ui-view>-->
+    <!--<div class="row">-->
+        <!--<div ng-controller="UserController as userController" ng-init="userController.getUser()">-->
+            <!--&lt;!&ndash;<p>Your fucking name is: {{ controller.user.name.first }}</p>&ndash;&gt;-->
+            <!--&lt;!&ndash;<p>Aaaaaand your fucking last name iiiiissss: {{controller.user.name.last}}</p>&ndash;&gt;-->
+            <!--&lt;!&ndash;<img ng-src="{{controller.user.picture}}">&ndash;&gt;-->
 
-            <button type="submit" ng-click="controller.removeUser(user)">do it</button>
-            </div>
-        </li>
-    </ul>
-</div>
+            <!--<ul ng-repeat="user in userController.users">-->
+                <!--<li>-->
+                    <!--<div class="row" style="border:1px solid black;">-->
+                        <!--<p>{{user.name.first}}</p>-->
+                        <!--<p>{{user.name.last}}</p>-->
+                        <!--<img ng-src="{{user.picture.medium}}">-->
 
+                        <!--<button type="submit" ng-click="userController.removeUser(user)">do it</button>-->
+                    <!--</div>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
 
-
-</div>
-
+<!--</ui-view>-->
+<div ui-view="main"></div>
 </body>
 </html>

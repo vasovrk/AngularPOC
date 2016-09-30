@@ -2,6 +2,7 @@ import * as _ from "lodash";
 import {User} from "../models/User";
 import {IUserService} from "../services/IUserService";
 
+
 export class UserController{
 
     public user:User;

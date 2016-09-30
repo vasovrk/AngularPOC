@@ -2,7 +2,10 @@ node_modules/
 bower_components/
 typings/
 build/
-
+out/
+config/
+webpack/
 .idea/
 
 *.iml
+test/

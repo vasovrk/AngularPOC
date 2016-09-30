@@ -12,7 +12,8 @@ module.exports = function(grunt) {
                 src: ['bower_components/angular/angular.js',
                     'bower_components/restangular/src/restangular.js',
                     'bower_components/lodash/lodash.js',
-                    'bower_components/bootstrap/dist/bootstrap.min.js'],
+                    'bower_components/bootstrap/dist/bootstrap.min.js',
+                    'bower_components/angular-ui-router/release/angular-ui-router.js'],
                 dest: 'src/<%= pkg.name %>.js'
             }
         },

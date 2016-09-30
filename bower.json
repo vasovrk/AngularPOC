@@ -19,6 +19,7 @@
     "angular-bootstrap": "~2.1.4",
     "angular-ui-grid": "~3.2.9",
     "bootstrap": "~3.3.7",
-    "lodash": "~4.16.2"
+    "lodash": "~4.16.2",
+    "angular-ui-router": "^0.2.18"
   }
 }

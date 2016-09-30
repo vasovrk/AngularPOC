@@ -53,10 +53,41 @@
 
 	"use strict";
 	var UserController_1 = __webpack_require__(2);
-	var UserService_1 = __webpack_require__(5);
-	angular.module('myModule', [])
+	var DetailsController_1 = __webpack_require__(5);
+	var UserService_1 = __webpack_require__(6);
+	angular.module('myModule', ['ui.router'])
 	    .service('_userService', UserService_1.UserService)
-	    .controller('UserController', UserController_1.UserController);
+	    .controller('UserController', UserController_1.UserController)
+	    .controller('DetailsController', DetailsController_1.DetailsController)
+	    .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+	        $stateProvider
+	            .state("search", {
+	            url: '/search',
+	            views: {
+	                "main": {
+	                    controller: UserController_1.UserController,
+	                    controllerAs: 'userController',
+	                    templateUrl: './user/user.html'
+	                }
+	            }
+	        })
+	            .state("details", {
+	            url: '/details/:username',
+	            views: {
+	                "main": {
+	                    controller: DetailsController_1.DetailsController,
+	                    controllerAs: 'detailsController',
+	                    templateUrl: './details/index-details.html',
+	                    resolve: {
+	                        requestedUserId: ['$stateParams', function ($stateParams) {
+	                                return $stateParams.username;
+	                            }]
+	                    }
+	                }
+	            }
+	        });
+	        $urlRouterProvider.otherwise('/search');
+	    }]);
 
 
 /***/ },
@@ -66,10 +97,11 @@
 	"use strict";
 	var _ = __webpack_require__(3);
 	var UserController = (function () {
-	    function UserController($scope, $q, $http, _userService) {
+	    function UserController($scope, $q, $http, $state, _userService) {
 	        this.$scope = $scope;
 	        this.$q = $q;
 	        this.$http = $http;
+	        this.$state = $state;
 	        this._userService = _userService;
 	        this.name = "lalakos";
 	    }
@@ -85,6 +117,9 @@
 	        console.log("laalalalaalalal" + user.name);
 	        var index = _.findIndex(this.users, user);
 	        _.pull(this.users, user);
+	    };
+	    UserController.prototype.goToUserPage = function (user) {
+	        this.$state.go("details", { "username": user.name.first });
 	    };
 	    return UserController;
 	}());
@@ -14847,6 +14882,21 @@
 
 /***/ },
 /* 5 */
+/***/ function(module, exports) {
+
+	"use strict";
+	var DetailsController = (function () {
+	    function DetailsController(requestedUserId) {
+	        this.name = "vaso";
+	        console.log("lalakosssss" + requestedUserId);
+	    }
+	    return DetailsController;
+	}());
+	exports.DetailsController = DetailsController;
+
+
+/***/ },
+/* 6 */
 /***/ function(module, exports) {
 
 	"use strict";

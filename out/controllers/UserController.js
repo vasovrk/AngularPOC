@@ -1,15 +1,29 @@
 "use strict";
+var _ = require("lodash");
 var UserController = (function () {
-    function UserController($scope, $q, $http, userService) {
+    function UserController($scope, $q, $http, $state, _userService) {
         this.$scope = $scope;
         this.$q = $q;
         this.$http = $http;
-        this.userService = userService;
+        this.$state = $state;
+        this._userService = _userService;
         this.name = "lalakos";
     }
     UserController.prototype.getUser = function () {
+        var _this = this;
         console.log("kourades");
-        this.userService.getUser();
+        this._userService.getUser().then(function (result) {
+            _this.users = [];
+            _this.users = result;
+        });
+    };
+    UserController.prototype.removeUser = function (user) {
+        console.log("laalalalaalalal" + user.name);
+        var index = _.findIndex(this.users, user);
+        _.pull(this.users, user);
+    };
+    UserController.prototype.goToUserPage = function (user) {
+        this.$state.go("details", { "username": user.name.first });
     };
     return UserController;
 }());

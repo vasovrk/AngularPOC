@@ -1,7 +1,6 @@
-
-import {UserService} from "../user/services/UserService";
-import {UserController} from "../user/UserController";
-import {DetailsController} from "../details/DetailsController";
+import {UserController} from "./user/UserController";
+import {DetailsController} from "./details/DetailsController";
+import {UserService} from "./services/UserService";
 
 angular.module('myModule',['ui.router'])
     .service('_userService', UserService)
@@ -15,7 +14,7 @@ angular.module('myModule',['ui.router'])
                     "main": {
                         controller: UserController,
                         controllerAs: 'userController',
-                        templateUrl: './user.html'
+                        templateUrl: './user/user.html'
                     }
                 }
             })
