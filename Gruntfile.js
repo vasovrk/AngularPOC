@@ -1,6 +1,20 @@
 module.exports = function(grunt) {
     var devWebpackConfig = require("./webpack.config.js");
     var _ = require('lodash');
+
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-qunit');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-webpack');
+    grunt.loadNpmTasks('grunt-karma');
+
+    grunt.registerTask('test', ['karma:specs']);
+    grunt.registerTask('hello', ['default','watch','connect']);
+    grunt.registerTask('default', ['concat','webpack:dev', 'connect','watch']);
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         concat: {
@@ -10,6 +24,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: ['bower_components/angular/angular.js',
+                    'bower_components/angular-mocks/angular-mocks.js',
                     'bower_components/restangular/src/restangular.js',
                     'bower_components/lodash/lodash.js',
                     'bower_components/bootstrap/dist/bootstrap.min.js',
@@ -67,18 +82,14 @@ module.exports = function(grunt) {
                 }
             }
         },
+        karma: {
+         specs: {
+             configFile: './karma.conf.js'
+         }
+        }
+
     });
 
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-qunit');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-webpack');
 
-    grunt.registerTask('test', ['jshint', 'qunit']);
-    grunt.registerTask('hello', ['default','watch','connect']);
-    grunt.registerTask('default', ['concat','webpack:dev', 'connect','watch']);
 
 };

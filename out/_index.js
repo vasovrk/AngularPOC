@@ -2,7 +2,8 @@
 var UserController_1 = require("./user/UserController");
 var DetailsController_1 = require("./details/DetailsController");
 var UserService_1 = require("./services/UserService");
-angular.module('myModule', ['ui.router', 'ui.bootstrap'])
+exports.my_module = "myModule";
+angular.module(exports.my_module, ['ui.router'])
     .service('_userService', UserService_1.UserService)
     .controller('UserController', UserController_1.UserController)
     .controller('DetailsController', DetailsController_1.DetailsController)
