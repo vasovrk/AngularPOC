@@ -10,10 +10,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-webpack');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-contrib-less');
 
     grunt.registerTask('test', ['karma:specs']);
     grunt.registerTask('hello', ['default','watch','connect']);
-    grunt.registerTask('default', ['concat','webpack:dev', 'connect','watch']);
+
+    grunt.registerTask('default', ['concat','webpack:dev','less:compile', 'connect','watch']);
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -26,10 +28,12 @@ module.exports = function(grunt) {
                 src: ['bower_components/angular/angular.js',
                     'bower_components/angular-mocks/angular-mocks.js',
                     'bower_components/restangular/src/restangular.js',
-                    'bower_components/lodash/lodash.js',
+                    'bower_components/lodash/dist/lodash.js',
                     'bower_components/bootstrap/dist/bootstrap.min.js',
                     'bower_components/angular-bootstrap/ui-bootstrap.js',
-                    'bower_components/angular-ui-router/release/angular-ui-router.js'],
+                    'bower_components/angular-ui-router/release/angular-ui-router.js',
+                    'bower_components/jquery/dist/jquery.js'
+                ],
                 dest: 'src/<%= pkg.name %>.js'
             }
         },
@@ -63,11 +67,21 @@ module.exports = function(grunt) {
         webpack: {
             dev: devWebpackConfig
         },
+        less:{
+        compile: {
+            options: {
+                paths: ['test/fixtures/include']
+            },
+            files: {
+                'src/application.css': 'src/index.less',
+                // 'tmp/less.css': ['test/fixtures/style.less'],
+                // 'tmp/concat.css': ['test/fixtures/style.less', 'test/fixtures/style2.less', 'test/fixtures/style3.less']
+            },
 
         watch: {
             files: ['<%= jshint.files %>'],
             tasks: ['jshint', 'qunit']
-        },
+        }}},
 
         connect: {
             options:{
