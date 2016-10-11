@@ -1,6 +1,8 @@
 import {UserController} from "./user/UserController";
 import {DetailsController} from "./details/DetailsController";
 import {UserService} from "./services/UserService";
+import {PersonListDirective} from "./directives/PersonListDirective";
+import {PersonListDirectiveController} from "./directives/PersonListDirectiveController";
 
 export const my_module = "myModule";
 
@@ -8,6 +10,8 @@ angular.module(my_module,['ui.router'])
     .service('_userService', UserService)
     .controller('UserController', UserController)
     .controller('DetailsController', DetailsController)
+    .controller('PersonDirectiveController', PersonListDirectiveController)
+    .directive('personList', PersonListDirective)
     .config(['$stateProvider','$urlRouterProvider',($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUrlRouterProvider) => {
         $stateProvider
             .state("search", {

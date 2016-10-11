@@ -19,8 +19,7 @@ export class UserController{
     }
 
     public getUser():void {
-        console.log("kourades");
-        this._userService.getUser().then((result) => {
+        this._userService.getUser(10).then((result) => {
             this.users = [];
             this.users = result;
         });
@@ -28,7 +27,6 @@ export class UserController{
 }
 
     public removeUser(user:User):void{
-        console.log("laalalalaalalal" + user.name);
 
         var index = _.findIndex(this.users, user);
 
