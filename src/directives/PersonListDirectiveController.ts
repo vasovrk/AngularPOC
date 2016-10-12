@@ -9,11 +9,6 @@ export class PersonListDirectiveController {
     constructor(private $state: ng.ui.IStateService,
                 private $scope: any,
                 private $interval: any) {
-        // var time = 5000;
-        // $scope.Time = $interval(()=>{
-        //     $scope.emit()
-        // },time);
-        // console.log(time);
     }
 
     getCurrentUri(person:User): void {

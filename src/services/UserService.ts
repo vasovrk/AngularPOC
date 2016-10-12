@@ -9,18 +9,25 @@ export class UserService implements IUserService{
                 private $q:ng.IQService,
                 private $interval:ng.IIntervalService,
                 private $rootScope: ng.IRootScopeService ){
+        this.init();
+        console.log("sdhfsdhbcsjdhbcjsbdcjdhcjdsbc");
+    }
 
-        $interval(() => {
-                this.$http.get("http://localhost:3000/persons?results=3")
-                    .then((result:any) => {
-                      $rootScope.$broadcast('myBroadcast', result);
-                    });
-        }, 1000*10);
+    private init() {
+        this.$interval(() => {
+            this.getRandomUsers();
+        }, 1000 * 10);
+    }
 
+    private getRandomUsers() {
+        this.$http.get("http://localhost:3000/persons?results=3")
+            .then((result: any) => {
+                this.$rootScope.$broadcast('myBroadcast', result);
+            });
     }
 
 
-    getUser(personNumber:number):ng.IPromise<Array<User>>{
+    getUser(personNumber:string):ng.IPromise<Array<User>>{
         var defer = this.$q.defer();
         this.$http.get("http://localhost:3000/persons?results=" + personNumber)
             .then((result:any) => {

@@ -1,18 +1,26 @@
 "use strict";
 var UserService = (function () {
     function UserService($http, $q, $interval, $rootScope) {
-        var _this = this;
         this.$http = $http;
         this.$q = $q;
         this.$interval = $interval;
         this.$rootScope = $rootScope;
-        $interval(function () {
-            _this.$http.get("http://localhost:3000/persons?results=3")
-                .then(function (result) {
-                $rootScope.$broadcast('myBroadcast', result);
-            });
-        }, 1000 * 10);
+        this.init();
+        console.log("sdhfsdhbcsjdhbcjsbdcjdhcjdsbc");
     }
+    UserService.prototype.init = function () {
+        var _this = this;
+        this.$interval(function () {
+            _this.getRandomUsers();
+        }, 1000 * 10);
+    };
+    UserService.prototype.getRandomUsers = function () {
+        var _this = this;
+        this.$http.get("http://localhost:3000/persons?results=3")
+            .then(function (result) {
+            _this.$rootScope.$broadcast('myBroadcast', result);
+        });
+    };
     UserService.prototype.getUser = function (personNumber) {
         var defer = this.$q.defer();
         this.$http.get("http://localhost:3000/persons?results=" + personNumber)

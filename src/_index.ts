@@ -1,47 +1,43 @@
 import {UserController} from "./user/UserController";
 import {DetailsController} from "./details/DetailsController";
-import {UserService} from "./services/UserService";
-import {PersonListDirective} from "./directives/PersonListDirective";
-import {PersonListDirectiveController} from "./directives/PersonListDirectiveController";
+import {my_module} from "./MyRoutes";
 
-export const my_module = "myModule";
 
-angular.module(my_module,['ui.router'])
-    .service('_userService', UserService)
-    .controller('UserController', UserController)
-    .controller('DetailsController', DetailsController)
-    .controller('PersonDirectiveController', PersonListDirectiveController)
-    .directive('personList', PersonListDirective)
-    .config(['$stateProvider','$urlRouterProvider',($stateProvider:ng.ui.IStateProvider, $urlRouterProvider:ng.ui.IUrlRouterProvider) => {
-        $stateProvider
-            .state("search", {
-                url: '/search',
-                views: {
-                    "main": {
-                        controller: UserController,
-                        controllerAs: 'userController',
-                        templateUrl: './user/user.html'
+export const my_routes = "MyRoutes";
+
+angular.module(my_routes, [my_module,'ui.router']).
+config(['$stateProvider', '$urlRouterProvider', ($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) => {
+    $stateProvider
+        .state("search", {
+            url: '/search',
+            views: {
+                "main": {
+                    controller: UserController,
+                    controllerAs: 'userController',
+                    templateUrl: './user/user.html'
+                }
+            }
+        })
+        .state("details", {
+            url: '/details/:username',
+            views: {
+                "main": {
+                    controller: DetailsController,
+                    controllerAs: 'detailsController',
+                    templateUrl: './details/index-details.html',
+                    resolve: {
+                        requestedUserId: ['$stateParams', ($stateParams)=> {
+                            return $stateParams.username
+                        }]
                     }
                 }
-            })
-            .state("details", {
-                url: '/details/:username',
-                views: {
-                    "main": {
-                        controller: DetailsController,
-                        controllerAs: 'detailsController',
-                        templateUrl: './details/index-details.html',
-                        resolve: {
-                            requestedUserId: ['$stateParams', ($stateParams)=>{
-                                return $stateParams.username
-                            }]
-                        }
-                    }
 
-                }
-            });
+            }
+        });
 
-        $urlRouterProvider.otherwise('/search');
+    $urlRouterProvider.otherwise('/search');
 
-    }]);
+}]);
+
+
 

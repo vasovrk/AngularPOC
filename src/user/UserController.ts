@@ -19,11 +19,10 @@ export class UserController{
     }
 
     public getUser():void {
-        this._userService.getUser(10).then((result) => {
+        this._userService.getUser("10").then((result) => {
             this.users = [];
             this.users = result;
         });
-
 }
 
     public removeUser(user:User):void{

@@ -1,6 +1,7 @@
 import {IUserService} from "./IUserService";
-import {my_module} from "../_index";
+
 import {User} from "../models/User";
+import {my_module} from "../MyRoutes";
 describe('lalakos', ()=> {
 
     var promiseService: ng.IQService;
@@ -33,13 +34,13 @@ describe('lalakos', ()=> {
 
 
     it('should just test', function() {
-        serverMock.expectGET("http://localhost:3000/persons?results=10").respond(
+        serverMock.expectGET("http://localhost:3000/persons?results=2").respond(
            [{name : {first : "vaso", last : "vrk"}, email:"lalakos@mail.com"},
                {name : {first : "vaso2", last : "vrk2"}, email:"lalakos2@mail.com"}]
         );
 
         var userResult:Array<User> = null;
-        userService.getUser().then((result) => {
+        userService.getUser("2").then((result) => {
             console.log(result);
             userResult = result;
         });
