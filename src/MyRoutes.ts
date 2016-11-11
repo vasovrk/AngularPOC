@@ -3,6 +3,7 @@ import {DetailsController} from "./details/DetailsController";
 import {UserService} from "./services/UserService";
 import {PersonListDirectiveController} from "./directives/PersonListDirectiveController";
 import {PersonListDirective} from "./directives/PersonListDirective";
+import {LalakosFilter} from "./details/LalakosFilter";
 export const my_module = "myModule";
 
 angular.module(my_module,['ui.router'])
@@ -10,7 +11,8 @@ angular.module(my_module,['ui.router'])
     .controller('UserController', UserController)
     .controller('DetailsController', DetailsController)
     .controller('PersonDirectiveController', PersonListDirectiveController)
-    .directive('personList', PersonListDirective);
+    .directive('personList', PersonListDirective)
+    .filter('lalakos', LalakosFilter);
 
 
 

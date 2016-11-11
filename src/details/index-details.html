@@ -1,5 +1,5 @@
 <div ng-init="detailsController.getRandomPeople()">
-    <p>{{detailsController.name}}</p>
+    <p>{{detailsController.name | lalakos : 'kourades'}}</p>
     <p>{{detailsController.user.name.first}}</p>
     <p>{{detailsController.user.name.last}}</p>
     <p>{{detailsController.user.gender}}</p>
